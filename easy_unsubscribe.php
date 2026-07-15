@@ -52,7 +52,9 @@ class easy_unsubscribe extends rcube_plugin {
 
 				foreach ( $items[1] as $uri ) {
 
-					$this->unsubscribe_img .= '<a class="easy_unsubscribe_link tooltip-right" data-tooltip="' . $this->gettext('click_to_unsubscribe') . '" data-href="'. htmlentities($uri) .'" target="_blank" onclick="easy_unsubscribe_click(this);"><img src="' . htmlentities($icon_url) . '" alt="' . $this->gettext('unsubscribe') . '" /></a>';
+					if (!preg_match('/^(https?:|mailto:)/i', trim($uri))) continue;
+
+					$this->unsubscribe_img .= '<a class="easy_unsubscribe_link tooltip-right" data-tooltip="' . $this->gettext('click_to_unsubscribe') . '" data-href="'. htmlentities(trim($uri)) .'" target="_blank" onclick="easy_unsubscribe_click(this);"><img src="' . htmlentities($icon_url) . '" alt="' . $this->gettext('unsubscribe') . '" /></a>';
 
 				}
 			}
