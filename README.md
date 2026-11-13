@@ -1,9 +1,9 @@
-# Roundcube Easy Unsubscribe
-Displays a small icon after the subject line when viewing an email, so you can very quickly unsubscribe. Multiple icons may show as the plugin is reliant upon the `List-Unsubscribe` header. Sometimes emails use multiple i.e. one mailto: and one URL.
+# Roundcube Easy Unsubscribe v2.0
+Displays an icon in the primary toolbar allowing you to quickly unsubscribe from said email. Multiple ways to unsubscribe are presented if the received email allows it. This plugin is reliant upon the `List-Unsubscribe` header.
 
 
 ## Demo Visual
-![Demo SS](https://i.ibb.co/58B3P57/Screenshot-2023-11-29-at-12-42-46-PM.png)
+<img width="800" height="246" alt="Demo Visual" src="https://github.com/user-attachments/assets/eaad3a7b-43bd-4f31-aaaf-3d22ff4a2531" />
 
 ## Deployment
 
