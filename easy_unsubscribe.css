@@ -1,34 +1,10 @@
 /* ---------- toolbar + menu-item icon ------------------------------ */
 
 .eu-unsub::before {
-    content: '\f1f6' !important;
+    content: '\f7a9' !important;
 }
 
 .eu-unsub.disabled::before { opacity: 0.4 !important; }
-
-/* Elastic ships two !important rules that collapse our pseudo away:
- *   `.popover .menu li a:before { height: inherit !important }`
- *   `.menu.toolbar a:before     { width:  auto    !important; margin: 0 !important }`
- * Both outrank our bare-class selector. Re-pin dimensions with
- * selectors one class deeper so ours wins on specificity in both
- * contexts (popover overflow AND desktop toolbar). */
-.popover .menu li a.eu-unsub::before,
-.popover-body .menu li a.eu-unsub::before,
-.menu.toolbar a.eu-unsub::before {
-    width: 24px !important;
-    height: 24px !important;
-}
-
-/* Desktop toolbar buttons stack icon-above-label because their ~64px
- * wide font-glyph icon crowds the 6rem button max-width, forcing the
- * inner label to wrap below. Our 24px icon fits beside the text, so
- * without intervention they sit inline. Force block + auto side
- * margins so the icon takes its own line and centers horizontally. */
-.menu.toolbar a.eu-unsub::before {
-    display: block !important;
-    margin: 0 auto !important;
-}
-
 
 /* ---------- popup menu rows --------------------------------------
  *
