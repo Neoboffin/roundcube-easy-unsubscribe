@@ -1,73 +1,10 @@
-/* ---------- toolbar + menu-item icon ------------------------------
- *
- * Elastic paints every .button::before as a FontAwesome glyph —
- * `content: "\f067"` with `font-family: Icons`. An empty `content: ""`
- * override leaves the pseudo as a zero-sized text node, which is why
- * the SVG only appeared after a click reflowed the button. Using
- * `content: url(...)` turns the pseudo into a replaced element
- * carrying the SVG directly, with its own intrinsic dimensions.
- *
- * Sizing is em-based so the icon tracks the font of its container —
- * tight in the main toolbar and larger in the mobile overflow menu,
- * matching Reply/Delete/Junk icons which are themselves em-scaled. */
-/* SVG lives in a CSS variable so we can re-declare the full background
- * shorthand on hover/focus/active without duplicating the data URL.
- * Re-declaration on those states is the only reliable way to beat
- * Elastic's `a:hover { background: … }` shorthand that would otherwise
- * wipe background-image along with background-color. */
-.eu-unsub {
-    --eu-icon: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Cpath stroke='%23535358' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M29 16V9c0-1-1-2-2-2H5C4 7 3 8 3 9v14c0 1 1 2 2 2h11'/%3E%3Cpath stroke='%23535358' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 9l11.862 8.212a2 2 0 002.276 0L29 9'/%3E%3Ccircle cx='24' cy='23' r='5' stroke='%23535358' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3Cpath stroke='%23535358' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 26l6-6'/%3E%3C/svg%3E");
-}
+/* ---------- toolbar + menu-item icon ------------------------------ */
 
 .eu-unsub::before {
-    content: "" !important;
-    display: inline-block !important;
-    width: 24px !important;
-    height: 24px !important;
-    /* `font-family: inherit` stops Elastic's `font-family: Icons` from
-     * trying to render our empty content as a text glyph; without it
-     * empty content collapses to zero width in some engines. */
-    font-family: inherit !important;
-    line-height: 1 !important;
-    vertical-align: middle !important;
-    align-self: center !important;
-    background: transparent var(--eu-icon) no-repeat center / contain !important;
-    margin: 0 1.5rem 0 0 !important;
-    float: none !important;
-}
-
-.eu-unsub:hover::before,
-.eu-unsub:focus::before,
-.eu-unsub:active::before,
-.eu-unsub[aria-expanded="true"]::before {
-    background: transparent var(--eu-icon) no-repeat center / contain !important;
+    content: '\f7a9' !important;
 }
 
 .eu-unsub.disabled::before { opacity: 0.4 !important; }
-
-/* Elastic ships two !important rules that collapse our pseudo away:
- *   `.popover .menu li a:before { height: inherit !important }`
- *   `.menu.toolbar a:before     { width:  auto    !important; margin: 0 !important }`
- * Both outrank our bare-class selector. Re-pin dimensions with
- * selectors one class deeper so ours wins on specificity in both
- * contexts (popover overflow AND desktop toolbar). */
-.popover .menu li a.eu-unsub::before,
-.popover-body .menu li a.eu-unsub::before,
-.menu.toolbar a.eu-unsub::before {
-    width: 24px !important;
-    height: 24px !important;
-}
-
-/* Desktop toolbar buttons stack icon-above-label because their ~64px
- * wide font-glyph icon crowds the 6rem button max-width, forcing the
- * inner label to wrap below. Our 24px icon fits beside the text, so
- * without intervention they sit inline. Force block + auto side
- * margins so the icon takes its own line and centers horizontally. */
-.menu.toolbar a.eu-unsub::before {
-    display: block !important;
-    margin: 0 auto !important;
-}
-
 
 /* ---------- popup menu rows --------------------------------------
  *
