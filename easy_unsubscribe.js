@@ -98,11 +98,16 @@
     }
 
     function follow(it) {
+        /* Re-check the scheme client-side as defence in depth: the server
+         * already gates these, but never hand window.open / compose a URI
+         * whose scheme we haven't re-verified here. */
         if (it.type === 'mailto') {
+            if (!/^mailto:/i.test(it.href)) return;
             /* Roundcube's compose parses mailto: URIs in _to, including
              * ?subject= and ?body=. */
             rcmail.open_compose_step({ _to: it.href });
         } else {
+            if (!/^https?:\/\//i.test(it.href)) return;
             window.open(it.href, '_blank', 'noopener,noreferrer');
         }
     }
