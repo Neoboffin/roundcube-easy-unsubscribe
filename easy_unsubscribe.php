@@ -63,8 +63,15 @@ class easy_unsubscribe extends rcube_plugin {
 
 		if(isset($p['output']['subject'])) {
 
-			$p['output']['subject']['value'] = $p['output']['subject']['value'] . $this->unsubscribe_img;
-			$p['output']['subject']['html'] = 1;
+			// The row is output as HTML once the link is appended, so escape the subject first
+			// (as the core does for rows without the 'html' flag). Without a link, leave the row to the core.
+			if($this->unsubscribe_img) {
+				if(empty($p['output']['subject']['html'])) {
+					$p['output']['subject']['value'] = rcube::SQ($p['output']['subject']['value']);
+				}
+				$p['output']['subject']['value'] .= $this->unsubscribe_img;
+				$p['output']['subject']['html'] = 1;
+			}
 
 		}
 
